@@ -1,11 +1,14 @@
 class Solution:
     def validMountainArray(self, arr: List[int]) -> bool:
-        length = len(arr)
-        if length < 3:
-            return False
-        start, end = 0, length-1
-        while start+1 < length-1 and arr[start] < arr[start+1]:
+        length = len(arr)   
+        start =  0
+        #Walk up
+        while start+1 < length and arr[start] < arr[start+1]:
             start += 1
-        while end-1 > 0 and arr[end] < arr[end-1]:
-            end -= 1
-        return start == end
+        #Peak can't be first or last
+        if start == 0 or start == length-1:
+            return False
+        #Walk Down
+        while start+1 < length and arr[start] > arr[start+1]:
+            start += 1
+        return start == length-1
