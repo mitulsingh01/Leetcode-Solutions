@@ -1,14 +1,12 @@
 class Solution:
     def minimumCost(self, cost: List[int]) -> int:
-        cost.sort()
+        cost.sort(reverse=True)
         minSum = 0
-        i = len(cost) - 1
-        while i >= 0:
-            if i >= 0:
+        n = len(cost)
+        for i in range(n):
+            #free index
+            if (i % 3 == 2):
+                continue
+            else:
                 minSum += cost[i]
-                i -= 1
-            if i >= 0:
-                minSum += cost[i]
-                i -= 1
-            i -= 1
         return minSum
