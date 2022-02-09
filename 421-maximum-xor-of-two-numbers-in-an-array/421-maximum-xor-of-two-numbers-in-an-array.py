@@ -1,17 +1,33 @@
+class TrieNode:
+    def __init__(self):
+        self.children = dict()                        # children nodes
+        self.val = 0                                  # end value 
+
+class Trie:
+    def __init__(self, n):
+        self.root = TrieNode()                        # root node
+        self.n = n                                    # max length of all numbers
+        
+    def add_num(self, num):
+        node = self.root 
+        for shift in range(self.n, -1, -1):           # only shift self.n bits 
+            val = 1 if num & (1 << shift) else 0      # verify bit from left to right 
+            if val not in node.children:
+                node.children[val] = TrieNode()
+            node = node.children[val]
+        node.val = num
+        
 class Solution:
     def findMaximumXOR(self, nums: List[int]) -> int:
-        # length of max number in a binary representation
-        L = len(bin(max(nums))) - 2
-        max_xor = 0
-        for i in range(L)[::-1]:
-        # go to the next bit by the left shift
-            max_xor <<= 1
-            # set 1 in the smallest bit
-            curr_xor = max_xor | 1
-            # compute all existing prefixes 
-            # of length (L - i) in binary representation
-            prefixes = {num >> i for num in nums}
-            # Update max_xor, if two of these prefixes could result in curr_xor.
-            # Check if p1^p2 == curr_xor, i.e. p1 == curr_xor^p2
-            max_xor |= any(curr_xor^p in prefixes for p in prefixes)
-        return max_xor
+        max_len = len(bin(max(nums))) - 2             # get max length of all numbers' binary
+        trie = Trie(max_len)
+        for num in nums: trie.add_num(num)            # build trie
+            
+        ans = 0
+        for num in nums:                              # for each num, find the number which can create max value with num using XOR
+            node = trie.root 
+            for shift in range(max_len, -1, -1):
+                val = 1 if num & (1 << shift) else 0  # verify bit from left to right
+                node = node.children[1-val] if 1-val in node.children else node.children[val] # try opposite bit first, otherwise use same bit
+            ans = max(ans, num ^ node.val)            # maintain maximum
+        return ans  
