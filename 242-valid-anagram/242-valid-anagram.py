@@ -1,6 +1,6 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        char = {}
+        """char = {}
         char2 = {}
         for i in s:
             if i in char:
@@ -12,4 +12,5 @@ class Solution:
                 char2[i] += 1
             else:
                 char2[i] = 1
-        return char == char2
+        return char == char2"""
+        return sorted(s) == sorted(t)
