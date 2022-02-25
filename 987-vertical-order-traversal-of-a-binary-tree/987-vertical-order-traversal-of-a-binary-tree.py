@@ -18,7 +18,8 @@ class Solution:
                     nxt.append((node.left, vertical - 1))
                 if node.right:
                     nxt.append((node.right, vertical + 1))
-                nxt.sort(key = lambda vertical: (vertical[1], vertical[0].val))
+                #sort the nxt according to vertical
+                nxt.sort(key = lambda x: (x[1], x[0].val))
             queue = nxt
         for i in sorted(mapp):
             res.append(mapp[i])
