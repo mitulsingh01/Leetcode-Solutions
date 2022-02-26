@@ -9,4 +9,16 @@ class Solution:
         if not root:
             return 0
         #recursive dfs
-        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+        """return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))"""
+        
+        #iterative dfs
+        stack = [[root, 1]]
+        res = 0
+        
+        while stack:
+            node, depth = stack.pop()
+            if node:
+                res = max(res, depth)
+                stack.append([node.left, depth+1])
+                stack.append([node.right, depth+1])
+        return res
