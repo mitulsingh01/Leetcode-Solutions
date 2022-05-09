@@ -1,27 +1,19 @@
 class Solution:
     def minCost(self, n: int, cuts: List[int]) -> int:
+        c = len(cuts)
         cuts.append(n)
         cuts.insert(0, 0)
         cuts.sort()
-        c = len(cuts)
-        dp = [[0 for _ in range(len(cuts))] for _ in range(len(cuts))]
+        dp = [[0 for _ in range(c+2)] for _ in range(c+2)]
 
-        for gap in range(2, len(cuts)):
-            i, j = 0, gap
-            while i < len(cuts) and j < len(cuts):
-
-                # To store the cost.
-                totalCost = float('inf')
-
-                # Try cuts.
-                for k in range(i + 1, j):
-
-                    # Find minimum.
-                    totalCost = min(totalCost, dp[i][k] + dp[k][j])
-
-                # Update cost.
-                dp[i][j] = totalCost + (cuts[j] - cuts[i])
-                i += 1
-                j += 1
-
-        return dp[0][len(cuts) - 1]
+        for i in range(c, 0, -1):
+            for j in range(1, c+1):
+                if i > j: 
+                    continue
+                mini = float('inf')
+                for ind in range(i, j+1):
+                    cost = cuts[j+1] - cuts[i-1] + dp[i][ind-1] + dp[ind+1][j]
+                    mini = min(cost, mini)
+                    
+                dp[i][j] = mini
+        return dp[1][c]
