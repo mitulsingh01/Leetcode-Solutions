@@ -1,5 +1,6 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
+        #recursion
         """if n == 0 or n == 1:
             return 1
         
@@ -7,8 +8,8 @@ class Solution:
         right = self.climbStairs(n-2)
         
         return left + right"""
-        
-        dp = [-1]*(n+1)
+        #memoization
+        """dp = [-1]*(n+1)
         
         def recursion(n, dp):
             if n == 1 or n == 2:
@@ -22,6 +23,16 @@ class Solution:
             return dp[n]
         
         
-        return recursion(n, dp)
+        return recursion(n, dp)"""
+        #tabulation
+        dp = [-1]*(n+1)
+        
+        dp[0] = 1
+        dp[1] = 2
+        
+        for i in range(2, n):
+            dp[i] = dp[i-1] + dp[i-2]
+        
+        return dp[n-1]
         
             
