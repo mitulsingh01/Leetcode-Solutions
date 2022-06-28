@@ -1,9 +1,27 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        oneStep, twoStep = 1, 1
-        for i in range(n-1):
-            temp = oneStep
-            oneStep += twoStep
-            twoStep = temp
-        return oneStep
+        """if n == 0 or n == 1:
+            return 1
+        
+        left = self.climbStairs(n-1)
+        right = self.climbStairs(n-2)
+        
+        return left + right"""
+        
+        dp = [-1]*(n+1)
+        
+        def recursion(n, dp):
+            if n == 1 or n == 2:
+                return n
+            
+            if dp[n] != -1:
+                return dp[n]
+            
+            dp[n] = recursion(n-1, dp) + recursion(n-2, dp)
+            
+            return dp[n]
+        
+        
+        return recursion(n, dp)
+        
             
