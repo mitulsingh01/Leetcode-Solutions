@@ -38,8 +38,8 @@ class Solution:
         if n == 1 or n == 2:
                 return n
         
-        prev2, prev = 1, 2
-        for i in range(2, n):
+        prev2, prev = 1, 1
+        for i in range(n-1):
             curr = prev + prev2
             prev2 = prev
             prev = curr
