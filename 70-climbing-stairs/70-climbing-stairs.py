@@ -25,7 +25,7 @@ class Solution:
         
         return recursion(n, dp)"""
         #tabulation
-        dp = [-1]*(n+1)
+        """dp = [-1]*(n+1)
         
         dp[0] = 1
         dp[1] = 2
@@ -33,6 +33,17 @@ class Solution:
         for i in range(2, n):
             dp[i] = dp[i-1] + dp[i-2]
         
-        return dp[n-1]
+        return dp[n-1]"""
+        #space optimization
+        if n == 1 or n == 2:
+                return n
+        
+        prev2, prev = 1, 2
+        for i in range(2, n):
+            curr = prev + prev2
+            prev2 = prev
+            prev = curr
+        
+        return prev
         
             
