@@ -29,7 +29,7 @@ class Solution:
                 dp[i][j] = dp[i-1][j] + dp[i][j-1]
         return dp[m-1][n-1]"""
         
-        prev = [0]*n
+        """prev = [0]*n
         for i in range(m):
             curr = [0]*n
             for j in range(n):
@@ -38,4 +38,13 @@ class Solution:
                 else:
                     curr[j] = prev[j] + curr[j-1]
             prev = curr
-        return prev[n-1]
+        return prev[n-1]"""
+        
+        N = m + n - 2
+        r = m - 1
+        res = 1
+        for i in range(1, r+1):
+            res *= ((N - r + i)/i)
+        if(res > int(res)+0.5):
+            return math.ceil(res)
+        return int(res)
