@@ -6,15 +6,15 @@
 #         self.right = right
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        ans = []
-        level = 0
-        self.helper(root, 0, ans)
-        return ans
-    
-    def helper(self, root, level, ans):
-        if root == None:
-            return
-        if level == len(ans):
-            ans.append(root.val)
-        self.helper(root.right, level+1, ans)
-        self.helper(root.left, level+1, ans)
+        #Reverse Preorder Traversal
+        def helper(node, level, ds):
+            if node == None:
+                return
+            if level == len(ds):
+                ds.append(node.val)
+            helper(node.right, level+1, ds)
+            helper(node.left, level+1, ds)
+        ds = []
+        helper(root, 0, ds)
+        return ds
+                
