@@ -6,7 +6,48 @@
 #         self.right = right
 class Solution:
     def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int: 
-        mapp = collections.defaultdict(list)
+        if not root:
+            return 0
+        ans = 0
+        q = collections.deque()
+        q.append([root, 0])
+        while q:
+            size = len(q)
+            mmin = q[0][1]
+            first, last = 0, 0
+            for i in range(size):
+                currID = q[0][1] - mmin
+                node = q[0][0]
+                
+                q.popleft()
+                
+                if i == 0:
+                    first = currID
+                if i == size - 1:
+                    last = currID
+                if node.left:
+                    q.append([node.left, currID*2 + 1])
+                if node.right:
+                    q.append([node.right, currID*2 + 2])
+                
+            ans = max(ans, last-first+1)
+        return ans
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        """mapp = collections.defaultdict(list)
         
         def dfs(node, level, column):
             if node:
@@ -15,7 +56,8 @@ class Solution:
                 dfs(node.right, level+1, column*2+1)
         
         dfs(root, 0, 0)
-        """for level in mapp:
-            #last-first+1"""
-        ans = [max(mapp[level]) - min(mapp[level]) +1 for level in mapp]
-        return max(ans)
+        for level in mapp:
+            #last-first+1
+            ans = [max(mapp[level]) - min(mapp[level]) +1]
+        return max(ans)"""
+        
