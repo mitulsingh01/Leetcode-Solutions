@@ -15,7 +15,7 @@ class Solution:
                 dfs(node.right, level+1, column*2+1)
         
         dfs(root, 0, 0)
-        for level in mapp:
-            #last-first+1
-            ans = [max(mapp[level]) - min(mapp[level]) +1 for level in mapp]
+        """for level in mapp:
+            #last-first+1"""
+        ans = [max(mapp[level]) - min(mapp[level]) +1 for level in mapp]
         return max(ans)
