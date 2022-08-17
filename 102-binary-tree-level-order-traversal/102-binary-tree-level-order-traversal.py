@@ -9,12 +9,10 @@ class Solution:
         res = []
         q = collections.deque()
         q.append(root)
-        
         while q:
-            length = len(q)
             level = []
-            
-            for i in range(length):
+            size = len(q)
+            for i in range(size):
                 node = q.popleft()
                 if node:
                     level.append(node.val)
