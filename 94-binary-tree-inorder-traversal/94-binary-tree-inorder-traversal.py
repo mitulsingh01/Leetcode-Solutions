@@ -6,7 +6,19 @@
 #         self.right = right
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        inorder = []
+        res, stack = [], [(root, False)]
+        while stack:
+            node, visited = stack.pop()  # the last element
+            if node:
+                if visited:
+                    res.append(node.val)
+                else:  # inorder: left -> root -> right
+                    stack.append((node.right, False))
+                    stack.append((node, True))
+                    stack.append((node.left, False))
+        return res
+        
+        """inorder = []
         curr = root
         while curr:
             if curr.left == None:
@@ -23,7 +35,7 @@ class Solution:
                     prev.right = None
                     inorder.append(curr.val)
                     curr = curr.right
-        return inorder
+        return inorder"""
         
         
         """ans = []
@@ -38,14 +50,5 @@ class Solution:
             
     """
     Iterative Solution
-    res, stack = [], []
-    while True:
-        while root:
-            stack.append(root)
-            root = root.left
-        if not stack:
-            return res
-        node = stack.pop()
-        res.append(node.val)
-        root = node.right
+    
     """
