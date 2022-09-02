@@ -16,7 +16,14 @@ class Solution:
                 r = mid - 1
         return l"""
         
-        slow = 0
+        for num in nums:          
+            # if the position is already marked
+            # then the index is the duplicate
+            if nums[abs(num)-1] < 0:
+                return abs(num)
+            nums[abs(num)-1] *= -1
+        
+        """slow = 0
         fast = 0
 
         while True:
@@ -32,5 +39,5 @@ class Solution:
             slow = nums[slow]
             left = nums[left]
             if slow == left:
-                return slow
+                return slow"""
                 
