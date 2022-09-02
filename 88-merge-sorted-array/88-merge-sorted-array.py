@@ -1,9 +1,22 @@
 class Solution:
-    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+    def merge(self, A: List[int], m: int, B: List[int], n: int) -> None:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        for i in range(n):
+        a, b, write_index = m-1, n-1, m + n - 1
+
+        while b >= 0:
+            if a >= 0 and A[a] > B[b]:
+                A[write_index] = A[a]
+                a -= 1
+            else:
+                A[write_index] = B[b]
+                b -= 1
+
+            write_index -= 1
+        
+        
+        """for i in range(n):
             nums1.pop()
         nums1 += nums2
             
@@ -25,4 +38,4 @@ class Solution:
                 gap1count += 1
                 if gap1count > 1: break
                 
-        return nums1
+        return nums1"""
