@@ -1,5 +1,6 @@
 class Solution:
     def singleNonDuplicate(self, nums: List[int]) -> int:
+        #odd-even index logic
         lo = 0
         hi = len(nums) - 2
         while lo <= hi:
